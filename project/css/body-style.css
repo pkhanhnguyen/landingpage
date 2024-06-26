@@ -1,0 +1,22 @@
+.heading{
+    font-size: 2em;
+    padding: 30px 0 10px;
+    text-align:center;
+    font-weight: 700; /*chỉnh cho khoảng cách đúng*/
+}
+
+body {
+    font-family: "Roboto", Arial, Tahoma, sans-serif;
+    margin: none;
+}
+
+.flex-container-main{
+    max-width: 1176px;
+    margin: 0 auto;
+    padding:10px 0px 25px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
