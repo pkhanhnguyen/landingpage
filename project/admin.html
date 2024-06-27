@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .form_format {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 30%;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            flex-direction: center;
+        }
+
+        input[type=text],
+        select,
+        textarea {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=url],
+        select {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="form_format">
+        <div class="container">
+            <h2>Form nhập dữ liệu bài viết</h2>
+            <!-- <label for="fname">First Name</label> -->
+            <input type="url" id="imageinput" placeholder="Đường link ảnh bài viết">
+
+            <!-- <label for="subject">Subject</label> -->
+            <textarea type="text" id="headinginput" placeholder="Tiêu đề bài viết" style="height:100px"></textarea>
+
+            <input type="submit" value="Submit" onclick="submit_data()">
+        </div>
+    </div>
+    <script>
+        function submit_data() { //retrieve input data
+            let image = document.getElementById("imageinput").value; //lấy value từ input ra
+            let heading = document.getElementById("headinginput").value;
+
+            var article = { image: image, heading: heading }; //create article object
+
+            let text = localStorage.getItem("testJSON"); //check if localStorage contains data
+            if (text != null) {
+                let obj = JSON.parse(text);
+                let arr = [];
+                for (let i = 0; i < obj.length; i++) {
+                    arr.push(obj[i]);
+                }
+                arr.push(article)
+                // let returnedTarget = [obj, article];
+                // let returnedTarget = Object.assign(article,obj);
+                var myJSON = JSON.stringify(arr);
+                localStorage.setItem("testJSON", myJSON);
+            } else {
+                var myJSON = JSON.stringify([article]);
+                localStorage.setItem("testJSON", myJSON);
+            }
+            // Clear previous content
+            document.getElementById('imageinput').value = '';
+            document.getElementById('headinginput').value = '';
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
+
+<!--làm form nhập dữ liệu, dùng localstorage, dùng SUMMERNOTE: https://summernote.org/-->

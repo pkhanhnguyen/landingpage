@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    #article-main {
+      width: 100%;
+      float: left;
+    }
+
+    .article {
+      width: 30%;
+      float: left;
+      margin: 2px 5px;
+      padding: 5px;
+      background-color: #e7e7e7;
+    }
+
+    .article-title {
+      font-weight: 600;
+    }
+
+    .article-description {
+      font-size: 13px;
+    }
+
+    .article-date {
+      font-size: 12px;
+      font-style: italic;
+    }
+  </style>
+  <body>
+    <h2>Home Page</h2>
+    <div id="article-main">
+      <!-- 
+      <div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div><div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div><div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div><div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div><div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div><div class="article"><div class="article-title">Giải pháp quản lý nhân sự dành cho ngành dệt – may mặc</div><div class="article-description">Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như </div><div class="article-date">24/06/2024 10:00 AM</div></div>
+       -->
+    </div>
+    <table>
+    <tr>
+    <td><span>Tiêu đề bài viết</span></td>
+    <td><input id="new-article-title" /></td>
+    </tr>
+    <tr>
+    <td><span>Mô tả bài viết</span></td>
+    <td><textarea id="new-article-description"></textarea></td>
+    </tr>
+    </table>
+    <button id="btnAddArticle">Thêm mới bài viết</button>
+    <button id="btnDeleteArticle">Xóa bài viết</button>
+    <p id="demo"></p>
+    <script>
+      var _dateCreate = new Date();
+      var arrArticle = [{
+        id: 1,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành dệt may',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }, {
+        id: 2,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành điện',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }, {
+        id: 3,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành công nghệ thông tin',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }];
+      console.log("DS Bài viết khởi tạo", arrArticle)
+      document.getElementById("btnAddArticle").addEventListener("click", onClickAddArticle);
+      document.getElementById("btnDeleteArticle").addEventListener("click", onClickDeleteArticle);
+
+      function onClickAddArticle() {
+        var article = {
+          id: 1,
+          //title: 'Tiêu đề bài viết',
+          description: 'Mô tả bài viết',
+          image: "https://vnresource.vn/wp-content/uploads/may-mc.jpg",
+          dateCreate: _dateCreate
+        };
+         var elTitle = document.getElementById("new-article-title");
+         var elDescription = document.getElementById("new-article-description");
+        //article.title = elTitle.value;
+        article.description = elDescription.value;
+        if(!article.title){
+        	alert("vui lòng nhập vào tiêu đề bài viết");
+        	return;
+        }
+        
+        arrArticle.unshift(article);
+        var articleDiv = createArticleHTML(article);
+        var articleMain = document.getElementById("article-main");
+        articleMain.appendChild(articleDiv);
+        
+        elTitle.value = "";
+        elDescription.value = "";
+        
+        console.log("DS Bài viết sau khi thêm mới", arrArticle);
+        //   document.getElementById("demo").innerHTML = Date();
+      }
+
+      function onClickDeleteArticle() {
+        arrArticle.pop();
+        var articleMain = document.getElementById("article-main");
+         var articleDelete = articleMain.lastElementChild;
+         articleMain.removeChild(articleDelete)
+        console.log("DS Bài viết sau khi xóa", arrArticle);
+        //   document.getElementById("demo").innerHTML = Date();
+      }
+
+      function RenderArticle() {
+        var articleMain = document.getElementById("article-main");
+        arrArticle.forEach(function(article, index) {
+          var articleDiv = createArticleHTML(article);
+          articleMain.appendChild(articleDiv);
+        });
+      };
+
+      function createArticleHTML(article) {
+        var articleDiv = document.createElement("div");
+        articleDiv.classList.add("article");
+        
+        var articleTitle = document.createElement("div");
+        articleTitle.classList.add("article-title");
+        articleTitle.innerText = article.title;
+        articleDiv.appendChild(articleTitle);
+        
+        var articleDescription = document.createElement("div");
+        articleDescription.classList.add("article-description")
+        articleDescription.innerText = article.description;
+        articleDiv.appendChild(articleDescription);
+        
+        var articleDate = document.createElement("div");
+        articleDate.classList.add("article-date")
+        articleDate.innerText = article.dateCreate
+        
+        articleDiv.appendChild(articleDate);
+        return articleDiv;
+      }
+      RenderArticle();
+    </script>
+  </body>
+</html>

@@ -48,9 +48,9 @@
                         <a href="http://vnresource.vn/chuyen-muc/tin-chuyen-nganh/">Tin chuyên ngành</a>
                     </div>
                 </div>
-                <a href="http://vnresource.vn/ve-vnresource/">Về VnResource</a>
-                <a href="https://vnresource.vn/khach-hang/">Tuyển dụng</a>
-                <a href="http://vnresource.vn/lien-he/">Liên hệ</a>
+                <a class="menu-item" href="http://vnresource.vn/ve-vnresource/">Về VnResource</a>
+                <a class="menu-item" href="https://vnresource.vn/khach-hang/">Tuyển dụng</a>
+                <a class="menu-item" href="http://vnresource.vn/lien-he/">Liên hệ</a>
             </div>
             <div class="search-container">
                 <form action="/action_page.php">
@@ -182,6 +182,12 @@
                     </div>
                 </div>
             </div>
+
+            <button id="btnAddArticle">Thêm mới bài viết</button>
+            <button id="btnDeleteArticle">Xóa bài viết</button>
+            <p id="demo"></p>
+
+
 
         </div>
     </div>
@@ -373,6 +379,9 @@
         </div>
     </div>
 
+    <div class="info4">
+        
+    </div>
 
     <!-- 
     <div class="info4" style="background-color: rgb(60, 82, 100);">info4</div>
@@ -418,18 +427,97 @@
     });
 
 
-    // document.querySelectorAll(".menu-item").forEach(
-    //     (box_main) => box_main.addEventListener("click", function menubox(){
-    //         // document.getElementsByName("menu").innerHTML =
-    //         let item = box_main.getAttribute("menu") //tạo biến để truyền gtri vào
-    //         let dropdown = document.querySelector('.dropdown[content="'+item+'"]')
-    //         if (dropdown) {
-    //             dropdown.classList.toggle("show");
-    //         }
-    //     })
-    // );
-    // document.querySelectorAll(".menu-item").addEventListener("click", function(evt){alert("hey");});
-    // function displayManuItem() {
-    //     alert('1234')
-    // }
+    //ÁP DỤNG ADD/DEL BÀI VIẾT:
+    var _dateCreate = new Date();
+      var arrArticle = [{
+        id: 1,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành dệt may',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }, {
+        id: 2,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành điện',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }, {
+        id: 3,
+        title: 'Giải pháp quản lý nhân sự dành cho ngành công nghệ thông tin',
+        description: 'Trong các khối ngành sản xuất, may mặc luôn là ngành phải tập trung thời gian và nguồn lực nhiều nhất để xử lý bài toán về quản lý nhân sự với những đặc thù nghiệp vụ phải kể đến như',
+        image: null,
+        dateCreate: _dateCreate
+      }];
+      console.log("DS Bài viết khởi tạo", arrArticle)
+      document.getElementById("btnAddArticle").addEventListener("click", onClickAddArticle);
+      document.getElementById("btnDeleteArticle").addEventListener("click", onClickDeleteArticle);
+
+      function onClickAddArticle() {
+        var article = {
+          id: 1,
+          //title: 'Tiêu đề bài viết',
+          description: 'Mô tả bài viết',
+          image: "https://vnresource.vn/wp-content/uploads/may-mc.jpg",
+          dateCreate: _dateCreate
+        };
+         var elTitle = document.getElementById("new-article-title");
+         var elDescription = document.getElementById("new-article-description");
+        //article.title = elTitle.value;
+        article.description = elDescription.value;
+        if(!article.title){
+        	alert("vui lòng nhập vào tiêu đề bài viết");
+        	return;
+        }
+        
+        arrArticle.unshift(article);
+        var articleDiv = createArticleHTML(article);
+        var articleMain = document.getElementById("article-main");
+        articleMain.appendChild(articleDiv);
+        
+        elTitle.value = "";
+        elDescription.value = "";
+        
+        console.log("DS Bài viết sau khi thêm mới", arrArticle);
+        //   document.getElementById("demo").innerHTML = Date();
+      }
+
+      function onClickDeleteArticle() {
+        arrArticle.pop();
+        var articleMain = document.getElementById("article-main");
+         var articleDelete = articleMain.lastElementChild;
+         articleMain.removeChild(articleDelete)
+        console.log("DS Bài viết sau khi xóa", arrArticle);
+        //   document.getElementById("demo").innerHTML = Date();
+      }
+
+      function RenderArticle() {
+        var articleMain = document.getElementById("article-main");
+        arrArticle.forEach(function(article, index) {
+          var articleDiv = createArticleHTML(article);
+          articleMain.appendChild(articleDiv);
+        });
+      };
+
+      function createArticleHTML(article) {
+        var articleDiv = document.createElement("div");
+        articleDiv.classList.add("article");
+        
+        var articleTitle = document.createElement("div");
+        articleTitle.classList.add("article-title");
+        articleTitle.innerText = article.title;
+        articleDiv.appendChild(articleTitle);
+        
+        var articleDescription = document.createElement("div");
+        articleDescription.classList.add("article-description")
+        articleDescription.innerText = article.description;
+        articleDiv.appendChild(articleDescription);
+        
+        var articleDate = document.createElement("div");
+        articleDate.classList.add("article-date")
+        articleDate.innerText = article.dateCreate
+        
+        articleDiv.appendChild(articleDate);
+        return articleDiv;
+      }
+      RenderArticle();
 </script>
